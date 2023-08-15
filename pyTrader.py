@@ -1,11 +1,3 @@
-
-
-''' ||| The River ||| '''
-''' Trading Algorithm for MetaTrader 5 '''
-''' Supply and Demand strategy '''
-''' Trading Bot on 29 pairs '''
-
-
 import MetaTrader5 as mt5
 import pandas as pd
 from datetime import datetime
@@ -398,47 +390,32 @@ class River:
         # To avoid this, just before the market close, stop searching for signals and remove all the stop losses.
         # After about 1 hour from the open when the spread came to normal re-add the stop losses and start searching for signal.
 
-        current_time = datetime.datetime.now().time()
 
-        # remove all stop loss
-        if current_time > datetime.time(21, 35) and current_time <= datetime.time(22, 0):
-            for S in self.symbol_list:
-                for pos in S:
-                    self.remove_sl(S, pos)
-
-        # add all stop loss
-        elif current_time > datetime.time(23, 11) and current_time <= datetime.time(23, 5):
-            for S in self.symbol_list:
-                for pos in S:
-                    self.add_sl(S, pos)
-
-        # execute
-        else:
-            counterr = 1
-            print(f'Looking for pattern in {self.symbol_list}...')
-            while True:
+        counterr = 1
+        print(f'Looking for pattern in {self.symbol_list}...')
+        while True:
                 # stop executing until:
-                current_time = datetime.datetime.now().time()
-                if current_time > datetime.time(21, 40) or current_time <= datetime.time(23, 12):
-                    try:
-                        for SYMBOL in self.symbol_list:
+            current_time = datetime.datetime.now().time()
+            if current_time > datetime.time(23, 45) or current_time <= datetime.time(23, 46):
+                try:
+                    for SYMBOL in self.symbol_list:
 
-                            self.main(counterr)
-                            counterr = counterr + 1
-                            if counterr > 5:
-                                counterr = 1
-                            last_close, rsi, direction = self.RSI(SYMBOL, TIMEFRAME, RSI_PERIOD)
-                            print(f"Looping through {SYMBOL} RSI: {rsi}" )
-                            time.sleep(2.8)
+                        self.main(counterr)
+                        counterr = counterr + 1
+                        if counterr > 5:
+                            counterr = 1
+                        last_close, rsi, direction = self.RSI(SYMBOL, TIMEFRAME, RSI_PERIOD)
+                        print(f"Looping through {SYMBOL} RSI: {rsi}")
+                        time.sleep(2.8)
 
 
-                    except KeyboardInterrupt:
-                        print('\n\KeyboardInterrupt. Stopping.')
-                        exit()
-                else:
-                    print('Starting again at 23:35')
-                    time.sleep(180)
-                    continue
+                except KeyboardInterrupt:
+                    print('\n\KeyboardInterrupt. Stopping.')
+                    exit()
+            else:
+                print('Starting again at 23:35')
+                time.sleep(180)
+                continue
 
 
 
