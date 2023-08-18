@@ -11,3 +11,6 @@ The code is designed to work with MetaTrader 5 (MT5) data and trading platform. 
 - Calculates RSI and SMA indicators for a given symbol and timeframe.
 - Generates buy and sell signals based on the RSI and SMA conditions.
 - Provides flexibility to adjust RSI and SMA parameters to fit your trading strategy.
+
+  
+![76aab6c3e6fb92b6a7754fac5f8dc5fd](https://github.com/ic3IT/Python-Trading-Bot-MT5/assets/138330122/a9be95b4-80bf-4ef2-b986-9166d4a6e93f)
